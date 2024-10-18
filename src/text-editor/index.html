@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <script src="/webui.js"></script>
+
+        <link rel="icon" type="image/png" href="img/icon.png" />
+        <title>Ed Text Editor</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/codemirror.min.css" />
+        <link rel="stylesheet" href="css/material.min.css" />
+    </head>
+    <body>
+        <nav>
+            <button id="open-btn" title="Open file" type="button"><i class="fas fa-folder-open">O</i></button>
+            <button id="save-btn" title="Save file" type="button" disabled><i class="fa fa-floppy-disk">S</i></button>
+            <button id="__close-btn" title="Close file" type="button"><i class="fas fa-circle-xmark">C</i></button>
+            <button id="about-btn" title="About Info" type="button"><i class="fas fa-question-circle">A</i></button>
+        </nav>
+        <div class="main" id="main">
+            <textarea id="editor"></textarea>
+        </div>
+        <div id="about-box" class="about-box">
+            <div class="about-box-content">
+                <h1>Ed Text Editor 0.1</h1>
+                <p>Text editor with built in IME.</p>
+            </div>
+        </div>
+        <script src="js/codemirror.min.js"></script>
+        <script src="js/ui.js"></script>
+    </body>
+</html>
