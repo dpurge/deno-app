@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <script src="webui.js"></script>
+		<title>LangEdit</title>
+    <link rel="icon" type="image/png" href="img/icon.png" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/latn.css" />
+    <link rel="stylesheet" href="css/arab.css" />
+    <link rel="stylesheet" href="css/hebr.css" />
+    <link rel="stylesheet" href="css/hans.css" />
+    <link rel="stylesheet" href="css/hant.css" />
+    <script src="js/ime.js"></script>
+    <script src="js/editor.js"></script>
+  </head>
+  <body>
+    <h1>LangEdit</h1>
+
+    <nav>
+      <label for="imeSelect">IME:</label>
+      <select name="imeSelect" id="imeSelect" class="latn" onchange="changeIME(this)">
+          <option value="arb">Arabic</option>
+          <option value="ukr">Ukrainian</option>
+          <option value="ell">Greek</option>
+          <option value="heb">Hebrew</option>
+          <option value="ind">Indonesian</option>
+          <option value="vie">Vietnamese</option>
+          <option value="cmn">Chinese</option>
+      </select>
+
+      <button id="saveBtn" onClick="save()">Save</button>
+      <button id="copyBtn" onClick="copy()">Copy</button>
+      <button id="loadBtn" onClick="load()">Load</button>
+      <button id="clearBtn" onClick="setText('')">Clear</button>
+      <button id="exitBtn" onClick="exit()">Exit</button>
+    </nav>
+
+    <div id="workspace">
+      <textarea id="editor" class="latn"></textarea>
+      <div id="filename"></div>
+    </div>
+
+    <div id="lookup">
+      <input id="composition" class="latn">
+      <textarea id="candidates" class="latn"></textarea>
+    </div>
+
+    <div id="info">
+      <p>LangEdit is a simple text editor with custom IME</p>
+    </div>
+  </body>    
+</html>
