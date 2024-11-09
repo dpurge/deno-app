@@ -1,1 +1,7 @@
-.arab {}
+.arab {
+    direction: rtl;
+    unicode-bidi: embed;
+    font-size: 1.6rem;
+    font-family: "Scheherazade New", sans-serif;
+    text-align: right;
+}

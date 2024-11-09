@@ -1,3 +1,7 @@
+/* html, body {
+  height: 100%;
+} */
+
 body {
   font-family: 'Arial', sans-serif;
   color: white;
@@ -39,10 +43,60 @@ nav > input:focus {
   border-color: #3498db;
 }
 
-#lookup {
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+#tools {
   display: none;
 }
 
 #info {
   display: none;
+}
+
+#filename {
+  float: left;
+}
+
+#workspace {
+  width: 80%;
+  /* width: 100%; */
+  height: 87vh;
+  float: left;
+  padding: 0;
+  margin: 0;
+  /* border: 2px solid red; */
+}
+
+#tools {
+  width: 19%;
+  height: 87vh;
+  float: right;
+  padding: 0;
+  margin: 0;
+  /* border: 2px solid blue; */
+}
+
+#editor {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#composition {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#candidates {
+  width: 100%;
+  /* height: 94%; */
+  height: 15em;
+  margin: 0;
+  box-sizing: border-box;
+  /* flex: 1 1 auto; */
 }

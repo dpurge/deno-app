@@ -6,6 +6,8 @@
     <link rel="icon" type="image/png" href="img/icon.png" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/latn.css" />
+    <link rel="stylesheet" href="css/cyrl.css" />
+    <link rel="stylesheet" href="css/grek.css" />
     <link rel="stylesheet" href="css/arab.css" />
     <link rel="stylesheet" href="css/hebr.css" />
     <link rel="stylesheet" href="css/hans.css" />
@@ -14,18 +16,20 @@
     <script src="js/editor.js"></script>
   </head>
   <body>
-    <h1>LangEdit</h1>
+    <!-- <h1>LangEdit</h1> -->
 
     <nav>
       <label for="imeSelect">IME:</label>
       <select name="imeSelect" id="imeSelect" class="latn" onchange="changeIME(this)">
           <option value="arb">Arabic</option>
-          <option value="ukr">Ukrainian</option>
+          <!-- <option value="cmn">Chinese</option> -->
           <option value="ell">Greek</option>
           <option value="heb">Hebrew</option>
           <option value="ind">Indonesian</option>
+          <option value="rus">Russian</option>
+          <option value="tur">Turkish</option>
+          <option value="ukr">Ukrainian</option>
           <option value="vie">Vietnamese</option>
-          <option value="cmn">Chinese</option>
       </select>
 
       <button id="saveBtn" onClick="save()">Save</button>
@@ -35,18 +39,24 @@
       <button id="exitBtn" onClick="exit()">Exit</button>
     </nav>
 
-    <div id="workspace">
+    <div id="workspace" class="container">
       <textarea id="editor" class="latn"></textarea>
-      <div id="filename"></div>
     </div>
 
-    <div id="lookup">
+    <div id="tools" class="container">
       <input id="composition" class="latn">
       <textarea id="candidates" class="latn"></textarea>
     </div>
+      
+    <div id="filename"></div>
 
     <div id="info">
       <p>LangEdit is a simple text editor with custom IME</p>
     </div>
+
+    <script type="module">
+      // window.downloadFileName = 'text-arabic.md';
+      window.onload = onLoad;
+    </script>
   </body>    
 </html>

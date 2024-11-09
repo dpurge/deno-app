@@ -33,22 +33,37 @@ function changeIME() {
     .then((ime) => {
         editor.setAttribute("class", ime.script);
         candidates.setAttribute("class", ime.script);
+        document.documentElement.setAttribute('lang', ime.lang.html);
         switch(ime.type) {
             case "suffix":
-                lookup.style.display = 'none';
+                ime.data.sort(sortIme);
+                tools.style.display = 'none';
+                workspace.style.width = '100%';
+                editor.ime = compileImeSuffix(ime.data);
+                editor.onkeypress = onKeyPressSuffix;
                 break;
             case "table":
-                lookup.style.display = 'block';
+                workspace.style.width = '80%';
+                tools.style.display = 'block';
+                editor.onkeypress = onKeyPressTable;
                 break;
             case null:
-                lookup.style.display = 'none';
+                tools.style.display = 'none';
+                workspace.style.width = '100%';
+                editor.ime = null;
+                editor.onkeypress = null;
                 break;
             default:
                 alert(`Invalid IME type: ${ime.type}`);
         }
+
+        console.log('Loaded IME: ' + JSON.stringify(ime));
     });
-    // loadIME(name).then(
-    // (ime) => {
-    //     console.log('Loaded IME: ' + JSON.stringify(ime));
-    // });
+}
+
+function onLoad() {
+    editor.state = {shift:false, alt:false, ctrl:false};
+	editor.onkeydown = onKeyDown;
+	editor.onkeyup = onKeyUp;
+    editor.focus();
 }

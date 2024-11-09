@@ -2,5 +2,9 @@
     "name": "Indonesian",
     "script": "latn",
     "type": null,
+    "lang": {
+        "iso": "ind",
+        "html": "in"
+    },
     "data": null
 }
