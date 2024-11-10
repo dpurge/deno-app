@@ -1,10 +1,10 @@
 {
-    "name": "Indonesian",
+    "name": "Latin",
     "script": "latn",
     "type": null,
     "lang": {
-        "iso": "ind",
-        "html": "in"
+        "iso": "lat",
+        "html": "la"
     },
     "data": null
 }
