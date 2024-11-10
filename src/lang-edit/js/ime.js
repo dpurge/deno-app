@@ -32,8 +32,20 @@ function sortIme(a,b) {
 	return b[0].length - a[0].length;
 }
 
-function compileImeSuffix(data) {
-    return data;
+function compileImeSuffix(data) { 
+    data.sort((a, b) => a[0].length - b[0].length);
+    const result = new Array()
+    for (i in data) {
+        let key = data[i][0];
+        const value = data[i][1];
+        for (j in result) {
+            if (key.startsWith(result[j][0])) {
+                key = result[j][1] + key.substring(result[j][0].length);
+            }
+        }
+        result.push([key, value]);
+    }
+    return result.sort((a, b) => b[0].length - a[0].length);
 }
 
 function onKeyPressSuffix(event) {

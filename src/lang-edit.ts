@@ -1,6 +1,4 @@
 import { parse as parseFlags, Args } from "https://deno.land/std@0.200.0/flags/mod.ts";
-// import { parse as parseYaml, stringify } from "https://deno.land/std@0.200.0/yaml/mod.ts";
-// import { YamlLoader } from "https://deno.land/x/yaml_loader/mod.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
 import { WebUI } from "https://deno.land/x/webui/mod.ts";
 
@@ -14,14 +12,12 @@ function parseArguments(args: string[]): Args {
     ];
 
     const stringArgs = [
-        // "lang",
         "ime",
     ];
 
     const alias = {
         "help": "h",
         "version": "v",
-        // "lang": "l",
         "ime": "i",
     };
 
@@ -42,14 +38,6 @@ function printVersion(): void {
     console.log('Version:', version);
 }
 
-// async function loadIME(e: WebUI.Event) {
-//     const name = e.arg.string(0);
-//     const yamlLoader = new YamlLoader();
-//     const ime = await yamlLoader.parseFile(path.join(rootFolder, 'ime', `${name}.yaml`));
-//     console.log(ime.name);
-//     return ime;
-// }
-
 async function save(e: WebUI.Event) {
     const filename = await e.window.script("return getFilename()").catch((error) => {
         console.error(`Error getting filename: ${error}`);
@@ -61,15 +49,32 @@ async function save(e: WebUI.Event) {
         return;
     });
 
-    console.log("Saving to", filename, ":", text);
+    try {
+        await Deno.writeTextFile(filename, text);
+        console.log('Saved: ', filename);
+    } catch (err) {
+        console.log("Error saving {filename}: ", err );
+    }
+
 }
 
-// async function copy(e: WebUI.Event) {
-//     console.log("Copy...");
-// }
-
 async function load(e: WebUI.Event) {
-    let text = 'Ala ma "psa"!';
+    const filename = await e.window.script("return getFilename()").catch((error) => {
+        console.error(`Error getting filename: ${error}`);
+        return;
+    });
+
+    let text = '';
+
+    try {
+        text = await Deno.readTextFile(filename);
+    } catch (err) {
+        if (!(err instanceof Deno.errors.NotFound)) {
+          throw err;
+        }
+        console.log('New file: ', filename );
+    }
+
     e.window.run(`setText("${text.replace(/"/g, '\\"')}");`);
 }
 
@@ -81,8 +86,6 @@ async function exit(e: WebUI.Event) {
 
 async function main(inputArgs: string[]): Promise<void> {
     const args = parseArguments(inputArgs);
-
-    // console.dir(args);
 
     if (args.help) {
         printHelp();
@@ -100,7 +103,6 @@ async function main(inputArgs: string[]): Promise<void> {
         Deno.exit(1);
     }
 
-    // let lang: string | null = args.lang;
     let ime: string | null = args.ime;
     let filename: string = path.resolve(args._[0]);
 
@@ -121,12 +123,10 @@ async function main(inputArgs: string[]): Promise<void> {
     w.bind("save", save);
     w.bind("load", load);
     w.bind("exit", exit);
-    // w.bind("loadIME", loadIME);
     w.show("index.html");
     if (ime) {
         w.run(`setIME("${ime}");`);
     }
-    // w.run('changeIME();');
     w.run(`setFilename("${filename.replace(/\\/g, '\\\\')}");`);
     await WebUI.wait();
 }

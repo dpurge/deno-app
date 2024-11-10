@@ -33,10 +33,10 @@ function changeIME() {
     .then((ime) => {
         editor.setAttribute("class", ime.script);
         candidates.setAttribute("class", ime.script);
-        document.documentElement.setAttribute('lang', ime.lang.html);
+        // document.documentElement.setAttribute('lang', ime.lang.html);
+        editor.lang = ime.lang.html;
         switch(ime.type) {
             case "suffix":
-                ime.data.sort(sortIme);
                 tools.style.display = 'none';
                 workspace.style.width = '100%';
                 editor.ime = compileImeSuffix(ime.data);
@@ -57,7 +57,8 @@ function changeIME() {
                 alert(`Invalid IME type: ${ime.type}`);
         }
 
-        console.log('Loaded IME: ' + JSON.stringify(ime));
+        // console.log('Loaded IME: ' + JSON.stringify(ime));
+        console.log('Loaded IME: ', ime.name);
     });
 }
 
