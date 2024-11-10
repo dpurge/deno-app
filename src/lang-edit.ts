@@ -75,7 +75,7 @@ async function load(e: WebUI.Event) {
         console.log('New file: ', filename );
     }
 
-    e.window.run(`setText("${text.replace(/"/g, '\\"')}");`);
+    e.window.run(`setText(\`${text.replace(/\`/g, '\\\`')}\`);`);
 }
 
 async function exit(e: WebUI.Event) {
