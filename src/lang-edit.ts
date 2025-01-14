@@ -1,6 +1,6 @@
 import { parse as parseFlags, Args } from "https://deno.land/std@0.200.0/flags/mod.ts";
 import * as path from "https://deno.land/std/path/mod.ts";
-import { WebUI } from "https://deno.land/x/webui/mod.ts";
+import { WebUI } from "https://deno.land/x/webui@2.5.1/mod.ts";
 
 const version = "0.1";
 const rootFolder = path.join(path.dirname(path.fromFileUrl(import.meta.url)), 'lang-edit');
