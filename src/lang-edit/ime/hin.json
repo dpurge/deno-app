@@ -1,0 +1,11 @@
+{
+    "name": "Devanagari",
+    "script": "deva",
+    "type": "suffix",
+    "lang": {
+        "iso": "hin",
+        "html": "hi"
+    },
+    "data": [
+    ]
+}
