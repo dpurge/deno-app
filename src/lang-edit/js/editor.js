@@ -40,18 +40,27 @@ function changeIME() {
                 tools.style.display = 'none';
                 workspace.style.width = '100%';
                 editor.ime = compileImeSuffix(ime.data);
+                editor.state = newStateSuffix();
+	            editor.onkeydown = onKeyDownSuffix;
                 editor.onkeypress = onKeyPressSuffix;
+	            editor.onkeyup = onKeyUpSuffix;
                 break;
             case "table":
                 workspace.style.width = '80%';
                 tools.style.display = 'block';
+                editor.ime = compileImeTable(ime.data);
+                editor.state = newStateTable();
+	            editor.onkeydown = onKeyDownTable;
                 editor.onkeypress = onKeyPressTable;
+	            editor.onkeyup = onKeyUpTable;
                 break;
             case null:
                 tools.style.display = 'none';
                 workspace.style.width = '100%';
                 editor.ime = null;
+	            editor.onkeydown = null;
                 editor.onkeypress = null;
+	            editor.onkeyup = null;
                 break;
             default:
                 alert(`Invalid IME type: ${ime.type}`);
@@ -63,8 +72,5 @@ function changeIME() {
 }
 
 function onLoad() {
-    editor.state = {shift:false, alt:false, ctrl:false};
-	editor.onkeydown = onKeyDown;
-	editor.onkeyup = onKeyUp;
     editor.focus();
 }
