@@ -105,28 +105,27 @@ function newStateTable() {
 
 function onKeyDownTable(event) {
 	const key = event.key
+
 	switch(key) {
-        case 'Backspace':
-            break
         case 'Tab':
+            event.preventDefault()
             prefix = this.value.substring(0, this.selectionStart)
 	        suffix = this.value.substring(this.selectionEnd,this.value.length)
-
             this.value = prefix + "\t" + suffix
-
             this.selectionStart = this.selectionEnd = this.value.length - suffix.length
-            event.preventDefault()
             break
-        case 'Esc':
+        case 'Escape':
+            this.state.input = ""
             break
         case 'PageUp':
+            // text = "[PageUp]"
             break
         case 'PageDown':
+            // text = "[PageDown]"
             break
-        case 'Space':
-            break
-        case 'Enter':
-            break
+        // case 'Enter':
+        //     // text = "[Enter]\n"
+        //     break
 	}
 }
 
@@ -136,22 +135,29 @@ function onKeyUpTable(event) {
 
 function onKeyPressTable(event) {
 	if (this.ime == null) return
-	if (event.key == "Enter") return
+	if (this.state.input == "" && (event.key == "Enter" || event.key == " ")) return
 	
 	event.preventDefault()
 	var key = event.key
 	
 	prefix = this.value.substring(0, this.selectionStart)
 	suffix = this.value.substring(this.selectionEnd,this.value.length)
+    text = undefined
     
-    console.log(key)
     switch (key) {
+        case " ":
+            text = this.state.input
+            this.state.input = ""
+            break
         default:
-            key = "*"
+            this.state.input += key
     }
+    // console.log(this.state.input)
 
-	this.value = prefix + key + suffix
-	this.selectionStart = this.selectionEnd = this.value.length - suffix.length
+    if (text) {
+	    this.value = prefix + text + suffix
+	    this.selectionStart = this.selectionEnd = this.value.length - suffix.length
+    }
 }
 
 // #endregion
