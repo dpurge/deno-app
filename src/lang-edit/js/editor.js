@@ -1,3 +1,7 @@
+const compose = (...functions) => (initialValue) => {
+  return functions.reduceRight((acc, fn) => fn(acc), initialValue)
+}
+
 function getIME() {
     return imeSelect.value;
 }
